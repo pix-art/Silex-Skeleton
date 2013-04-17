@@ -1,7 +1,7 @@
 Silex-Skeleton
 ==============
 
-This is a basic silex skelton i made for simple websites.
+This is a basic silex skelton i made for simple websites. all global bundles are declared in build.php
 
 It contains:
   - Twig
@@ -11,3 +11,9 @@ It contains:
   - Doctrine Dbal
 
 Feel free to use this if you see it usefull
+
+
+TODO
+----
+
+Split routing out index.php
