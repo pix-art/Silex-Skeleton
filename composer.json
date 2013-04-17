@@ -1,0 +1,18 @@
+{
+    "require": {
+        "silex/silex": "1.0.*@dev",
+        "doctrine/dbal": "2.2.*",
+        "symfony/twig-bridge": "2.1.*",
+        "twig/twig": ">=1.2.0,<2.0-dev",
+        "symfony/translation": "~2.1",
+        "symfony/config": "~2.1",
+        "symfony/yaml": "~2.1",
+        "mheap/Silex-Assetic": "dev-master@dev",
+        "deralex/yaml-config-service-provider": "1.0.x-dev"
+    },
+    "autoload": {
+        "psr-0": {
+        	"": "src"
+        }
+    }
+}

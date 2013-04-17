@@ -1,0 +1,11 @@
+debug: true
+default_language: nl
+languages: [nl, fr, en]
+google_analytics: XXX-XXXX
+
+database:
+    driver: pdo_mysql
+    host: localhost
+    dbname: dbname
+    user: user
+    password: password

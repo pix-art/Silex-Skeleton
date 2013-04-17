@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Untitled{% endblock %}</title>
+        <!-- Styles -->
+        {% block stylesheets %}
+        <link rel="stylesheet" href="/assets/css/styles.css" type="text/css" media="screen" />
+        {% endblock %}
+
+
+        <!--[if lt IE 9]>
+          <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block javascripts %}
+        {% endblock %}
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+     </head>
+    <body>
+        {% block body %}
+            
+        {% endblock %}
+        <script type="text/javascript">
+            var _gaq=[['_setAccount','{{ app.config.google_analytics }}'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
+
