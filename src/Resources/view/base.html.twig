@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Untitled{% endblock %}</title>
+        <base href="{{ app.config.base_url }}">
         <!-- Styles -->
         {% block stylesheets %}
-        <link rel="stylesheet" href="/assets/css/styles.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="assets/css/styles.css" type="text/css" media="screen" />
         {% endblock %}
 
 

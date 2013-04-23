@@ -1,7 +1,12 @@
 debug: true
+
+base_url: http://www.example.com
+
 default_language: nl
 languages: [nl, fr, en]
+
 google_analytics: XXX-XXXX
+
 
 database:
     driver: pdo_mysql
