@@ -5,7 +5,7 @@ base_url: http://www.example.com
 default_language: nl
 languages: [nl, fr, en]
 
-google_analytics: XXX-XXXX
+google_analytics: UA-XXXXX-X
 
 
 database:
