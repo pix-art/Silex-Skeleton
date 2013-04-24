@@ -25,7 +25,4 @@ $app->get('/fr', function () use ($app) {
 ->bind('start_fr');
 
 
-$app->get('{_locale}/home', 'Controller\HomeController::indexAction')->bind('home');
-
-
 $app->run();

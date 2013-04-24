@@ -1,5 +1,7 @@
 <?php
-
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Routing\Loader\YamlFileLoader as YamlRouting;
+use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -59,6 +61,14 @@ $app['translator'] = $app->share($app->extend('translator', function($translator
 
     return $translator;
 }));
+
+$app['routes'] = $app->extend('routes', function (RouteCollection $routes, $app) {
+    $loader     = new YamlRouting(new FileLocator(__DIR__ . '/src/Resources/config'));
+    $collection = $loader->load('routes.yml');
+    $routes->addCollection($collection);
+
+    return $routes;
+});
 
 $app->register(new Silex\Provider\SessionServiceProvider());
 
