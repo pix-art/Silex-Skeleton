@@ -9,11 +9,7 @@ It contains:
   - Translations
   - Assetic
   - Doctrine Dbal
+  - Routes.yml
 
 Feel free to use this if you see it usefull
 
-
-TODO
-----
-
-Split routing out index.php
