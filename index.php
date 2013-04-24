@@ -11,18 +11,4 @@ $app['TestService'] = function ($app) {
 
 $app['current_url'] = $_SERVER['REQUEST_URI'];
 
-
-
-//ROUTES
-$app->get('/', function () use ($app) {
-    return $app->redirect($app['url_generator']->generate('home', array('_locale' => 'nl')));
-})
-->bind('start');
-
-$app->get('/fr', function () use ($app) {
-    return $app->redirect($app['url_generator']->generate('home', array('_locale' => 'fr')));
-})
-->bind('start_fr');
-
-
 $app->run();

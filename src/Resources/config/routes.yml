@@ -1,7 +1,11 @@
 # routes.yml
-#start:
-    #pattern:   /
-    #defaults:  { _controller: 'Silex\RedirectableUrlMatcher::redirect', path: home, permanent: true }
+start:
+    pattern:   /
+    defaults:  { _controller: 'Controller\RedirectController::redirectAction', path: home, slugs: {_locale: nl} }
+
+start_fr:
+    pattern:   /fr
+    defaults:  { _controller: 'Controller\RedirectController::redirectAction', path: home, slugs: {_locale: fr} }
 
 home:
   path: /{_locale}/home
