@@ -4,6 +4,7 @@ use Symfony\Component\Routing\Loader\YamlFileLoader as YamlRouting;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 $app = new Silex\Application();
 $app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/src/Resources/config/settings.yml'));
@@ -78,3 +79,7 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => $app['config']['database']
 ));
+
+$app->before(function (Request $request) use ($app) {
+    $app['twig']->addGlobal('current_route', str_replace('_', ' ', $request->get('_route')));
+});
