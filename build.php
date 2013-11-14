@@ -18,36 +18,6 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     return $twig;
 }));
 
-$app->register(new SilexAssetic\AsseticServiceProvider());
-
-$app['assetic.path_to_web'] = __DIR__ . '/assets';
-$app['assetic.options'] = array(
-    'debug' => $app['config']['debug'],
-);
-$app['assetic.filter_manager'] = $app['assetic.filter_manager'] = $app->share(
-    $app->extend('assetic.filter_manager', function($fm, $app) {
-        $fm->set('sass', new  Assetic\Filter\Sass\SassFilter(
-            '/usr/local/bin/sass'
-        ));
-
-        return $fm;
-    })
-);
-$app['assetic.asset_manager'] = $app->share(
-    $app->extend('assetic.asset_manager', function($am, $app) {
-        $am->set('styles', new Assetic\Asset\AssetCache(
-            new Assetic\Asset\GlobAsset(
-                __DIR__ . '/src/Resources/css/main.sass',
-                array($app['assetic.filter_manager']->get('sass'))
-            ),
-            new Assetic\Cache\FilesystemCache(__DIR__ . '/cache/assetic')
-        ));
-        $am->get('styles')->setTargetPath('css/styles.css');
-
-        return $am;
-    })
-);
-
 $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'locale_fallback' => $app['config']['default_language'],
 ));

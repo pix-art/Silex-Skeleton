@@ -1,5 +1,26 @@
 {% extends 'layout.html.twig' %}
+{% import "modules/macro.html.twig" as macros %}
 
 {% block content %}
-	{{ app.translator.trans('hello') }}
+	<p>
+		{{ 'hello'|trans|replace({'%name%' : 'Anonymous'}) }}
+	</p>
+
+	 <p>
+	 	<a href="#" data-ga-action="cta" data-ga-value="click" >This is useless but tracked!</a>
+	 </p>
+
+	 <p>
+	 	<a 
+	 		href="{{ macros.facebookUrl('social_title'|trans, 'social_text'|trans) }}" 
+	 		data-ga-action="social" 
+	 		data-ga-value="share" 
+	 		>
+	 		This is a share button
+	 	</a>
+	 </p>
+
+	 <p>
+	 	<a href="{{ path('step1') }}" data-ga-action="cta" data-ga-value="go">Go go baby!</a>
+	 </p>
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+{% import "modules/macro.html.twig" as macros %}
+
+{% block content %}
+	<form action="{{ path('step1_post') }}" method="post">
+          
+         <div class="control-group {% if errors.variable is defined %}error{% endif %}">
+	        <label class="control-label" for="variable">{{ 'variable'|trans }}</label>
+	        <div class="controls">
+	            <input 
+	            	class="input-large" 
+	            	id="variable" 
+	            	name="variable" 
+	            	type="text" 
+	            	{% if data.variable is defined %}value="{{ data.variable }}"{% endif %}
+	            />
+	        </div>
+	        {% if errors.variable is defined %}
+	        	<span>Fill in the field</span>
+	        {% endif %}
+	    </div>
+
+        <button type="submit">{{ 'submit'|trans }}</button>
+
+    </form>
+{% endblock %}

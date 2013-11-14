@@ -1,12 +1,24 @@
 # routes.yml
 start:
     pattern:   /
-    defaults:  { _controller: 'Controller\RedirectController::redirectAction', path: home, slugs: {_locale: nl} }
+    defaults:  { _controller: 'Controller\RedirectController::redirectAction', path: index, slugs: {_locale: nl} }
 
 start_fr:
     pattern:   /fr
-    defaults:  { _controller: 'Controller\RedirectController::redirectAction', path: home, slugs: {_locale: fr} }
+    defaults:  { _controller: 'Controller\RedirectController::redirectAction', path: index, slugs: {_locale: fr} }
 
-home:
-  path: /{_locale}/home
-  defaults: { _controller: 'Controller\HomeController::indexAction' }
+index:
+  path: /{_locale}/index
+  defaults: { _controller: 'Controller\ApplicationController::indexAction' }
+
+step1:
+  path: /{_locale}/step1
+  defaults: { _controller: 'Controller\ApplicationController::step1Action' }
+  requirements:
+      _method:  GET
+
+step1_post:
+  path: /{_locale}/step1
+  defaults: { _controller: 'Controller\ApplicationController::step1PostAction' }
+  requirements:
+      _method:  POST
