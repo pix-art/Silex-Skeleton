@@ -1,12 +1,12 @@
 debug: true
 
-base_url: http://test.pix-art.be:42013/
+base_url: http://www.example.com/
 
 default_language: nl
 languages: [nl, fr, en]
 
 google_analytics:
-    code: UA-32893269-1
+    code: UA-XXXXXXX-1
     id: XXX #Last numbers of job nr
     name: Yunomi #used in GA tracking!
 
