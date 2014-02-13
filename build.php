@@ -3,7 +3,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\YamlFileLoader as YamlRouting;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 $app = new Silex\Application();
@@ -14,7 +13,7 @@ $app['debug'] = $app['config']['debug'];
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
         'twig.path' => __DIR__.'/src/Resources/view/',
     ));
-$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
+$app['twig'] = $app->share($app->extend('twig', function ($twig, $app) {
     return $twig;
 }));
 
@@ -22,8 +21,7 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'locale_fallback' => $app['config']['default_language'],
 ));
 
-
-$app['translator'] = $app->share($app->extend('translator', function($translator, $app) {
+$app['translator'] = $app->share($app->extend('translator', function ($translator, $app) {
     $translator->addLoader('yaml', new YamlFileLoader());
 
     foreach ($app['config']['languages'] as $language) {
@@ -51,5 +49,23 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 ));
 
 $app->before(function (Request $request) use ($app) {
+    //Flashbag
+
+    /**
+     * Add this in your controller
+     * $app[ 'session' ]->set( 'flash', array(
+     *               'type'    =>'error',
+     *               'short'   =>'invalid_gift',
+     *               'ext'     =>'The gift you selected is invalid',
+     *           ));
+     **/
+
+    $flash = $app[ 'session' ]->get( 'flash' );
+    $app[ 'session' ]->set( 'flash', null );
+
+    if ( !empty( $flash ) ) {
+        $app[ 'twig' ]->addGlobal( 'flash', $flash );
+    }
+
     $app['twig']->addGlobal('current_route', str_replace('_', ' ', $request->get('_route')));
 });
