@@ -4,6 +4,7 @@ use Symfony\Component\Routing\Loader\YamlFileLoader as YamlRouting;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Symfony\Component\HttpFoundation\Request;
+use Silex\Provider\FormServiceProvider;
 
 $app = new Silex\Application();
 $app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/src/Resources/config/settings.yml'));
@@ -42,6 +43,10 @@ $app['routes'] = $app->extend('routes', function (RouteCollection $routes, $app)
 $app->register(new Silex\Provider\SessionServiceProvider());
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+$app->register(new FormServiceProvider());
+
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 
 //DATABASE
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(

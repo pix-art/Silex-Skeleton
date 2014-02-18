@@ -2,6 +2,8 @@
 {% import "modules/macro.html.twig" as macros %}
 
 {% block content %}
+
+	{{ 'name'|trans }}
 	<p>
 		{{ 'hello'|trans|replace({'%name%' : 'Anonymous'}) }}
 	</p>

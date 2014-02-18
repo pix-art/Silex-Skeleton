@@ -2,25 +2,33 @@
 {% import "modules/macro.html.twig" as macros %}
 
 {% block content %}
-	<form action="{{ path('step1_post') }}" method="post">
-          
-         <div class="control-group {% if errors.variable is defined %}error{% endif %}">
-	        <label class="control-label" for="variable">{{ 'variable'|trans }}</label>
-	        <div class="controls">
-	            <input 
-	            	class="input-large" 
-	            	id="variable" 
-	            	name="variable" 
-	            	type="text" 
-	            	{% if data.variable is defined %}value="{{ data.variable }}"{% endif %}
-	            />
-	        </div>
-	        {% if errors.variable is defined %}
-	        	<span>Fill in the field</span>
+	{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+	    {{ form_errors(form) }}
+
+	    <div>
+	    	{# Fancy bad tryouts to see how we can theme this #}
+	        {{ 'name'|trans }}
+	        {% if form_errors(form.name) %}
+	        	ERRORS
 	        {% endif %}
+	        {{ form_widget(form.name) }}
 	    </div>
 
-        <button type="submit">{{ 'submit'|trans }}</button>
+	    <div>
+	        {{ form_label(form.email) }}
+	        {{ form_errors(form.email) }}
+	        {{ form_widget(form.email) }}
+	    </div>
 
-    </form>
+	    <div>
+	        {{ form_label(form.gender) }}
+	        {{ form_errors(form.gender) }}
+	        {{ form_widget(form.gender) }}
+	    </div>
+
+	    <div>
+	        {{ form_widget(form.save) }}
+	    </div>
+
+	{{ form_end(form) }}
 {% endblock %}

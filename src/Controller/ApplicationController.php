@@ -1,45 +1,34 @@
-<?php 
+<?php
 namespace Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Exceptions\ValidationException;
-use Model\Example;
 
 class ApplicationController
 {
 
     public function indexAction(Request $request, Application $app)
-    {	
+    {
         return $app['twig']->render('index.html.twig', array());
     }
 
     public function step1Action(Request $request, Application $app)
-    {	 
-        return $app['twig']->render('step1.html.twig');
-    }
+    {
 
-    public function step1PostAction(Request $request, Application $app)
-    {	
-    	try {
+        $form = $app['FormService']->build();
+        $form->handleRequest($request);
 
-    		$data = $request->request->all();
-    		$app['ExampleService']->validate($data);
+        if ($form->isValid()) {
 
-            $test = new Example();
-            //Set variables from post data in your model
-    		$test->setVariable($data['variable']);
+            $example = $form->getData();
 
-    		$app['ExampleService']->insert($test);
-            
-    	} catch (ValidationException $e) {
-            $errors = $e->getErrors();
-    		return $app['twig']->render('step1.html.twig', array('errors' => $errors, 'data' => $data));
-    	}
+            $app['DatabaseService']->insert($example);
 
-    	//All was good you can now redirect to the right page
-        //return $app->redirect($app['urlService']->generate('next_page', array()));
+            return $app->redirect('...');
+        }
+
+        // display the form
+        return $app['twig']->render('step1.html.twig', array('form' => $form->createView()));
     }
 
 }

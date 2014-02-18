@@ -1,71 +1,103 @@
-<?php 
+<?php
 namespace Model;
 
-class Example
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints as Assert;
+
+class Example extends BaseModel
 {
 
-	private $variable;
+    protected $name;
+    protected $email;
+    protected $gender;
 
     /**
-     * This is a magic function that will put every
-     * private variable into an array with the name
-     * CAPITALIZED as key and the data it contains as value
-     **/
-    
-    public function toColumn()
-    {
-        $array = array();
-        $class_vars = get_object_vars($this);
+     * Set all your constraints
+     *
+     * TODO: Learn to create custom constraint
+     */
 
-        foreach ($class_vars as $name => $value) {
-            $array[strtoupper($name)] = utf8_decode($value);
-        }
-        
-        return $array;
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank(array('message' => 'fill_in_field')));
+        $metadata->addPropertyConstraint('name', new Assert\Length(array('min' => 5, 'minMessage' => 'input_to_short')));
+        $metadata->addPropertyConstraint('email', new Assert\NotBlank(array('message' => 'fill_in_field')));
+        $metadata->addPropertyConstraint('email', new Assert\Email(array('message' => 'incorrect_email')));
+        $metadata->addPropertyConstraint('gender', new Assert\NotBlank(array('message' => 'fill_in_field')));
+        $metadata->addPropertyConstraint('gender', new Assert\Choice(array(
+            'choices' => array('male', 'female'),
+            'message' => 'choose_gender',
+        )));
     }
 
     /**
-     * This is a magic counter function for toColumn. 
-     * It will transform every variable in your array into
-     * lowercase and search this model for a private 
-     * variable that has the same name. Then it will map
-     * the data from the array with the model via the 
-     * set function.
-     **/
-
-    public function fromColumn(array $data)
-    {
-        foreach ($data as $key => $value) {
-            $ucfirst = ucfirst(strtolower($key));
-            $name = 'set'.$ucfirst;
-
-            if (method_exists($this, $name)) {
-                $this->$name(utf8_encode($value));
-            }
-        }
-    }
-
-
-    /**
-     * Gets the value of variable.
+     * Gets the value of name.
      *
      * @return mixed
      */
-    public function getVariable()
+    public function getName()
     {
-        return $this->variable;
+        return $this->name;
     }
 
     /**
-     * Sets the value of variable.
+     * Sets the value of name.
      *
-     * @param mixed $variable the variable
+     * @param mixed $name the name
      *
      * @return self
      */
-    public function setVariable($variable)
+    public function setName($name)
     {
-        $this->variable = $variable;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of email.
+     *
+     * @return mixed
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Sets the value of email.
+     *
+     * @param mixed $email the email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Gets the value of gender.
+     *
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Sets the value of gender.
+     *
+     * @param mixed $gender the gender
+     *
+     * @return self
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
 
         return $this;
     }
