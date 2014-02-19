@@ -3,6 +3,7 @@ namespace Model;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
+use Constraint\ContainsAlphanumeric;
 
 class Example extends BaseModel
 {
@@ -13,13 +14,12 @@ class Example extends BaseModel
 
     /**
      * Set all your constraints
-     *
-     * TODO: Learn to create custom constraint
      */
 
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('name', new Assert\NotBlank(array('message' => 'fill_in_field')));
+        $metadata->addPropertyConstraint('name', new ContainsAlphanumeric());
         $metadata->addPropertyConstraint('name', new Assert\Length(array('min' => 5, 'minMessage' => 'input_to_short')));
         $metadata->addPropertyConstraint('email', new Assert\NotBlank(array('message' => 'fill_in_field')));
         $metadata->addPropertyConstraint('email', new Assert\Email(array('message' => 'incorrect_email')));

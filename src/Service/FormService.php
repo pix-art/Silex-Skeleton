@@ -17,7 +17,7 @@ class FormService
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function build()
+    public function buildStep1()
     {
         //Set model + default values
         $example = new Example();

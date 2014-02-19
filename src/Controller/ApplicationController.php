@@ -15,7 +15,7 @@ class ApplicationController
     public function step1Action(Request $request, Application $app)
     {
 
-        $form = $app['FormService']->build();
+        $form = $app['FormService']->buildStep1();
         $form->handleRequest($request);
 
         if ($form->isValid()) {
