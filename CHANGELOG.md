@@ -18,4 +18,3 @@ CHANGELOG
 * Removed ValidationExceptions
 * Abstract BaseModel for all Models
 * DatabaseService to handle basic calls
-  
