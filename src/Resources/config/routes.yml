@@ -14,11 +14,3 @@ index:
 step1:
   path: /{_locale}/step1
   defaults: { _controller: 'Controller\ApplicationController::step1Action' }
-  requirements:
-      _method:  GET
-
-step1_post:
-  path: /{_locale}/step1
-  defaults: { _controller: 'Controller\ApplicationController::step1PostAction' }
-  requirements:
-      _method:  POST
