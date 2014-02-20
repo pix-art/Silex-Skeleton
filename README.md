@@ -1,5 +1,6 @@
 INTRO
 =====
+###Version 1.1
 
 **Welcome to the Pix-art Silex Skeleton guide.**
 
@@ -23,7 +24,7 @@ Silex is an MVC framework. The folder structure i use is optimized for a simple 
 	└── src
 	    └── .htaccess
 	    └── Controller
-	    └── Exceptions
+	    └── Constraint
 	    └── Model
 	    └── Resources
 	    │ 	└── config
@@ -76,7 +77,7 @@ Google Analytics, these variables are needed for analytics.js found in assets
 	google_analytics:
     	code: UA-XXXXXXX-1
     	id: XXX #Unique ID for your project added to each action
-    	name: Yunomi #Name used to push your data to google
+    	name: MyProject #Name used to push your data to google
     	
 Facebook
 
@@ -100,40 +101,40 @@ SERVICE
 
 Services should be declared in index.php
 	
-Your service will contain all of your logic. I have an example service with validation and input for a form that gets written into a database. 
+Your service will contain all of your logic. 2 basic services have been provided: FormService and DatabaseService these two basicly do what you expect. 
+
+**FormService** will be used to build your forms and comes with injection of the FormFactory and UrlGenerator.
+
+**DatabaseService** will be used to handle our database insert/update/load and it comes with the DBAL Connection injected. 
 
 I use dependency injection in it's most basic form which means you'll have to inject all your services in other services via de constructor after you declared them. 
 
 Example of database injection:
 
-	$app['ExampleService'] = function ($app) {
-    	return new Service\ExampleService($app['db']);
+	$app['DatabaseService'] = function ($app) {
+    	return new Service\DatabaseService($app['db'], $app['config']['database']['dbname']);
 	};
 
-EXCEPTIONS
+VALIDATION
 ==========
 
 	└── src
-	    └── Exceptions
-	    	└── ValidationException
+	    └── Constraint
+	    	└── ...
 
-For easy form validation i've made a **ValidationException**. 
+This folder had an example of a custom validation constraint. Here you can declare any other custom constraints you would like to use in your project.
 
-	use Exceptions\ValidationException;
+*Example:*
 
-This is an extension of the basic php **Exception**. But it has an extra variable that contains errors in the following form.
-	
-	array(
-		'variable1' => 'not_found',
-		'variable2' => 'incorrect_data'
-	);
-	
-You can extract the error from this exception by doing the following
-	
-	try {
-            
-    } catch (ValidationException $e) {
-    	$errors = $e->getErrors();
+I created a custom Alphanumeric check which can now be used by including the constraint in your model (For more info check the next chapter).
+
+	use Constraint\ContainsAlphanumeric;
+
+You can call this constraint in your loadValidatorMetadata function as following:
+
+	public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('myfield', new ContainsAlphanumeric());
     }
 
 MODEL
@@ -141,9 +142,13 @@ MODEL
 
 	└── src
 	    └── Model
+	    	└── BaseModel.php
+	    	└── BaseModelInterface.php
 	    	└── ...
 
-Models are build like in most cases, with private variables and getters and setters per variable. In this skeleton I use a coding standard where we use the **uppercase version** of the **variable** as **column name** for the **database**. This allows you to use the magic functions **fromColumn($dbData)** and **toColumn()**.
+Models are build like in most cases, with private variables and getters and setters per variable. In this skeleton I use a coding standard where we use the **uppercase version** of the **variable** as **column name** for the **database**. This allows you to use the magic functions **fromColumn($dbData)** and **toColumn()**. (Explenation of these functions below)
+
+In order for all models to work with the DatabaseService they have to **extend the BaseModel**. This BaseModel implements the BaseModelInterface and is hereby enforced to have atleast 3 functions: toColumn(), fromColumn(), loadValidatorMetadata(). This last function is used to define all constraints for the current model.
 
 ###toColumn
 
