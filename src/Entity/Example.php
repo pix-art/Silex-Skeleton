@@ -1,16 +1,37 @@
 <?php
-namespace Model;
+namespace Entity;
 
+use Doctrine\ORM\Mapping AS ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Constraint\ContainsAlphanumeric;
 
-class Example extends BaseModel
+/**
+ * @ORM\Entity
+ */
+class Example implements BaseEntityInterface
 {
+   /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
 
-    protected $name;
-    protected $email;
-    protected $gender;
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=1)
+     */
+    private $gender;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $email;
 
     /**
      * Set all your constraints
@@ -31,21 +52,20 @@ class Example extends BaseModel
     }
 
     /**
-     * Gets the value of name.
+     * Get id
      *
-     * @return mixed
+     * @return integer
      */
-    public function getName()
+    public function getId()
     {
-        return $this->name;
+        return $this->id;
     }
 
     /**
-     * Sets the value of name.
+     * Set name
      *
-     * @param mixed $name the name
-     *
-     * @return self
+     * @param  string  $name
+     * @return Example
      */
     public function setName($name)
     {
@@ -55,21 +75,43 @@ class Example extends BaseModel
     }
 
     /**
-     * Gets the value of email.
+     * Get name
      *
-     * @return mixed
+     * @return string
      */
-    public function getEmail()
+    public function getName()
     {
-        return $this->email;
+        return $this->name;
     }
 
     /**
-     * Sets the value of email.
+     * Set gender
      *
-     * @param mixed $email the email
+     * @param  string  $gender
+     * @return Example
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    /**
+     * Get gender
      *
-     * @return self
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * Set email
+     *
+     * @param  string  $email
+     * @return Example
      */
     public function setEmail($email)
     {
@@ -79,26 +121,12 @@ class Example extends BaseModel
     }
 
     /**
-     * Gets the value of gender.
+     * Get email
      *
-     * @return mixed
+     * @return string
      */
-    public function getGender()
+    public function getEmail()
     {
-        return $this->gender;
-    }
-
-    /**
-     * Sets the value of gender.
-     *
-     * @param mixed $gender the gender
-     *
-     * @return self
-     */
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-
-        return $this;
+        return $this->email;
     }
 }
