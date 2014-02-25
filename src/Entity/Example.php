@@ -8,15 +8,21 @@ use Constraint\ContainsAlphanumeric;
 
 /**
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
  */
 class Example implements BaseEntityInterface
 {
-   /**
+    /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+    * @ORM\Column(type="datetime")
+    */
+    private $last_updated;
 
     /**
      * @ORM\Column(type="string", length=250)
@@ -32,6 +38,15 @@ class Example implements BaseEntityInterface
      * @ORM\Column(type="string", length=250)
      */
     private $email;
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function prePersistPreUpdate()
+    {
+        $this->last_updated = new \DateTime();
+    }
 
     /**
      * Set all your constraints
@@ -128,5 +143,28 @@ class Example implements BaseEntityInterface
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * Set last_updated
+     *
+     * @param \DateTime $lastUpdated
+     * @return Example
+     */
+    public function setLastUpdated($lastUpdated)
+    {
+        $this->last_updated = $lastUpdated;
+
+        return $this;
+    }
+
+    /**
+     * Get last_updated
+     *
+     * @return \DateTime 
+     */
+    public function getLastUpdated()
+    {
+        return $this->last_updated;
     }
 }
