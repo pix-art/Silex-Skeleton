@@ -13,7 +13,8 @@
         "deralex/yaml-config-service-provider": "1.0.x-dev",
         "neutron/silex-imagine-provider": "dev-master",
         "facebook/php-sdk": "dev-master",
-        "tobiassjosten/facebook-service-provider": "dev-master"
+        "tobiassjosten/facebook-service-provider": "dev-master",
+        "dflydev/doctrine-orm-service-provider": "1.0.*@dev"
     },
     "autoload": {
         "psr-0": {

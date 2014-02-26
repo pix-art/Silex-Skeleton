@@ -3,6 +3,7 @@ namespace Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Entity\Example;
 
 class ApplicationController
 {
@@ -15,15 +16,19 @@ class ApplicationController
     public function step1Action(Request $request, Application $app)
     {
 
-        $form = $app['FormService']->buildStep1();
+        $example = new Example();
+
+        $form = $app['FormService']->buildStep1($example);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
             $example = $form->getData();
 
-            $app['DatabaseService']->insert($example);
+            $app['orm.em']->persist($example);
+            $app['orm.em']->flush();
 
+            //$app['DatabaseService']->insert($example);
             return $app->redirect('...');
         }
 

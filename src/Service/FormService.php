@@ -2,7 +2,7 @@
 
 namespace Service;
 
-use Model\Example;
+use Entity\Example;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
@@ -17,12 +17,8 @@ class FormService
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function buildStep1()
+    public function buildStep1(Example $example)
     {
-        //Set model + default values
-        $example = new Example();
-        $example->setName('Your name');
-
         $form = $this->formFactory->createBuilder('form', $example)
                     //Set Form info
                     ->setAction($this->urlGenerator->generate('step1'))

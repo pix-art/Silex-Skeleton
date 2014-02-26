@@ -18,3 +18,16 @@ CHANGELOG
 * Removed ValidationExceptions
 * Abstract BaseModel for all Models
 * DatabaseService to handle basic calls
+
+1.3.0 (2014-02-26)
+------------------
+
+* Removed Database service
+* Removed Models
+* Introduced Entities
+* Implemented Doctrine ORM
+       
+        "dflydev/doctrine-orm-service-provider": "1.0.*@dev"
+* Autogenerating database structure
+* Refactored framework structure
+

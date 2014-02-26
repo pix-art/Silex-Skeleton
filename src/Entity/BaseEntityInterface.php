@@ -1,15 +1,11 @@
 <?php
-namespace Model;
+namespace Entity;
 
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
-Interface BaseModelInterface
+Interface BaseEntityInterface
 {
 
     public static function loadValidatorMetadata(ClassMetadata $metadata);
-
-    public function toColumn();
-
-    public function fromColumn(array $data);
 
 }
