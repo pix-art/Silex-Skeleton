@@ -5,6 +5,7 @@ use Doctrine\ORM\Mapping AS ORM;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Constraints as Assert;
 use Constraint\ContainsAlphanumeric;
+use Constraint\Unique;
 
 /**
  * @ORM\Entity
@@ -63,6 +64,7 @@ class Example implements BaseEntityInterface
             'choices' => array('male', 'female'),
             'message' => 'choose_gender',
         )));
+        $metadata->addPropertyConstraint('email', new Unique(array('field' => 'email', 'entity' => $metadata->getReflectionClass()->getName())));
     }
 
     /**

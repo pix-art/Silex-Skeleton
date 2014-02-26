@@ -16,13 +16,7 @@ class ApplicationController
     public function step1Action(Request $request, Application $app)
     {
 
-        $example = $app['orm.em']
-            ->getRepository('Entity\Example')
-            ->find(1);
-
-        if (!$example) {
-            $example = new Example();
-        }
+        $example = new Example();
 
         $form = $app['FormService']->buildStep1($example);
         $form->handleRequest($request);
@@ -30,7 +24,6 @@ class ApplicationController
         if ($form->isValid()) {
 
             $example = $form->getData();
-            //TODO Validate unique;
 
             $app['orm.em']->persist($example);
             $app['orm.em']->flush();

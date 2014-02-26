@@ -1,8 +1,6 @@
 <?php
 
 use Dflydev\Silex\Provider\DoctrineOrm\DoctrineOrmServiceProvider;
-use Silex\ConstraintValidatorFactory;
-use ServiceProvider\UniqueValidatorServiceProvider;
 
 //DATABASE
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
@@ -26,12 +24,4 @@ $app->register(new DoctrineOrmServiceProvider, array(
             )
         ),
     ),
-));
-
-$app->register(new UniqueValidatorServiceProvider());
-
-$app->register(new Silex\Provider\ValidatorServiceProvider(), array(
-    'validator.validator_factory' => new ConstraintValidatorFactory($app, array(
-        'validator.unique' => $app['validator.unique']
-    ))
 ));

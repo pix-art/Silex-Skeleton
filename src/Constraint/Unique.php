@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class Unique extends Constraint
 {
-    public $message = 'This field must contain a unique value.';
-    public $table;
+    public $notUniqueMessage = '%string% has already been used.';
+    public $entity;
     public $field;
 
     public function validatedBy()

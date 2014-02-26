@@ -4,6 +4,8 @@ use Symfony\Component\Routing\Loader\YamlFileLoader as YamlRouting;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Silex\Provider\FormServiceProvider;
+use Silex\ConstraintValidatorFactory;
+use ServiceProvider\UniqueValidatorServiceProvider;
 
 //TWIG
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -40,3 +42,11 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new FormServiceProvider());
+
+$app->register(new UniqueValidatorServiceProvider());
+
+$app->register(new Silex\Provider\ValidatorServiceProvider(), array(
+    'validator.validator_factory' => new ConstraintValidatorFactory($app, array(
+        'validator.unique' => 'validator.unique'
+    ))
+));
