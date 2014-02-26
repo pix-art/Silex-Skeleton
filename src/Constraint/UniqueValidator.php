@@ -4,14 +4,15 @@ namespace Constraint;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Doctrine\ORM\EntityManager;
 
 class UniqueValidator extends ConstraintValidator
 {
-    private $orm;
+    private $em;
 
     public function validate($value, Constraint $constraint)
     {
-        $exists = $this->orm
+        $exists = $this->em
              ->getRepository($constraint->entity)
              ->findOneBy(array($constraint->field => $value));
 
@@ -24,8 +25,8 @@ class UniqueValidator extends ConstraintValidator
         return true;
     }
 
-    public function setOrm($orm)
+    public function setEm(EntityManager $em)
     {
-        $this->orm = $orm;
+        $this->em = $em;
     }
 }

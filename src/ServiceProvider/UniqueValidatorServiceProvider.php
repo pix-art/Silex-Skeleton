@@ -15,7 +15,7 @@ class UniqueValidatorServiceProvider implements ServiceProviderInterface
     {
         $app['validator.unique'] = $app->share(function ($app) {
             $validator =  new UniqueValidator();
-            $validator->setOrm($app['orm.em']);
+            $validator->setEm($app['orm.em']);
 
             return $validator;
         });

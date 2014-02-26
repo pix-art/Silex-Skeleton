@@ -15,8 +15,11 @@ Silex is an MVC framework. The folder structure i use is optimized for a simple 
 	├── composer.json
 	├── composer.lock
 	├── index.php
-	├── build.php
 	├── .htaccess
+	├── bootstrap
+	│   └── config.php
+	│   └── database.php
+	│   └── general.php
 	├── assets
 	│   └── ...
 	├── vendor
@@ -25,12 +28,14 @@ Silex is an MVC framework. The folder structure i use is optimized for a simple 
 	    └── .htaccess
 	    └── Controller
 	    └── Constraint
-	    └── Model
+	    └── Entity
+	    └── Proxy
 	    └── Resources
 	    │ 	└── config
 	    │ 	└── translations
 	    │ 	└── view
 	    └── Service
+	    └── ServiceProvider
 
 **Site:** [https://github.com/pix-art/Silex-Skeleton](https://github.com/pix-art/Silex-Skeleton)
 
@@ -101,18 +106,16 @@ SERVICE
 
 Services should be declared in index.php
 	
-Your service will contain all of your logic. 2 basic services have been provided: FormService and DatabaseService these two basicly do what you expect. 
+Your service will contain all of your logic. 1 basic service has been provided: FormService.
 
 **FormService** will be used to build your forms and comes with injection of the FormFactory and UrlGenerator.
 
-**DatabaseService** will be used to handle our database insert/update/load and it comes with the DBAL Connection injected. 
-
 I use dependency injection in it's most basic form which means you'll have to inject all your services in other services via de constructor after you declared them. 
 
-Example of database injection:
+Example FormService injection:
 
-	$app['DatabaseService'] = function ($app) {
-    	return new Service\DatabaseService($app['db'], $app['config']['database']['dbname']);
+	$app['FormService'] = function ($app) {
+    	return new Service\FormService($app['form.factory'], $app['url_generator']);
 	};
 
 VALIDATION
@@ -124,9 +127,9 @@ VALIDATION
 
 This folder had an example of a custom validation constraint. Here you can declare any other custom constraints you would like to use in your project.
 
-*Example:*
+**No dependency example:**
 
-I created a custom Alphanumeric check which can now be used by including the constraint in your model (For more info check the next chapter).
+I created a custom Alphanumeric check which can now be used by including the constraint in your Entity (For more info check the next chapter).
 
 	use Constraint\ContainsAlphanumeric;
 
@@ -137,68 +140,63 @@ You can call this constraint in your loadValidatorMetadata function as following
         $metadata->addPropertyConstraint('myfield', new ContainsAlphanumeric());
     }
 
-MODEL
+**Dependency example:**
+
+I created a Unique constraint that allows you to check if a field is already used in your database.
+
+	use Constraint\Unique;
+	
+You can call this constraint in your loadValidatorMetadata function as following:
+
+	$metadata->addPropertyConstraint('email', new Unique(array('field' => 'email', 'entity' => $metadata->getReflectionClass()->getName())));
+
+For more information on how to do DI in a constraint read my protip:
+
+https://coderwall.com/p/wz2tiq
+
+ENTITY
 =====
 
 	└── src
-	    └── Model
-	    	└── BaseModel.php
-	    	└── BaseModelInterface.php
+	    └── Entity
+	    	└── BaseEntityInterface.php
 	    	└── ...
 
-Models are build like in most cases, with private variables and getters and setters per variable. In this skeleton I use a coding standard where we use the **uppercase version** of the **variable** as **column name** for the **database**. This allows you to use the magic functions **fromColumn($dbData)** and **toColumn()**. (Explenation of these functions below)
+Entities are like Models, but they have a direct relation to your database schema. Via Anotations I declare all the fields. 
 
-In order for all models to work with the DatabaseService they have to **extend the BaseModel**. This BaseModel implements the BaseModelInterface and is hereby enforced to have atleast 3 functions: toColumn(), fromColumn(), loadValidatorMetadata(). This last function is used to define all constraints for the current model.
+**Example:**
 
-###toColumn
-
-	class Example
+	/**
+ 	* @ORM\Entity
+	* @ORM\HasLifecycleCallbacks()
+	*/
+	class Example implements BaseEntityInterface
 	{
+       /**
+	    * @ORM\Column(type="integer")
+	    * @ORM\Id
+    	* @ORM\GeneratedValue(strategy="AUTO")
+	    */
+    	private $id;
 
-		private $variable;
-		
-		...
-	 
-	 	public function toColumn()
-    	{
-    	    $array = array();
-	        $class_vars = get_object_vars($this);
+    	/**
+    	* @ORM\Column(type="datetime")
+    	*/
+    	private $last_updated;
 
-        	foreach ($class_vars as $name => $value) {
-    	        $array[strtoupper($name)] = utf8_decode($value);
- 	       }
-        
-        	return $array;
-    	}
-    	
-    	...    	
-	 
-This Example model will allow you to call the function toColumn. Then it will convert every class variable into an uppercase and add it as a key to an array. The value of each key will be filled up with the value the variable contained. This way you can easy map your Model to your Database. 
+    	/**
+	     * @ORM\Column(type="string", length=250)
+    	 */
+	    private $name;
 
-###fromColumn
+After you declared your fields you can use the doctrine tool set to generate your setters/getters.
 
-	class Example
-	{
+	php vendor/bin/doctrine orm:generate-entities src/
 
-		private $variable;
-		
-		...
-	 
-	 	public function fromColumn(array $data)
-    	{
-       		foreach ($data as $key => $value) {
-            	$ucfirst = ucfirst(strtolower($key));
-	            $name = 'set'.$ucfirst;
+You can also generate your schema by executing
+	
+	 php vendor/bin/doctrine orm:schema-tool:create
 
-    	        if (method_exists($this, $name)) {
-        	        $this->$name(utf8_encode($value));
-            	}
-        	}
-    	}
-    	
-    	...
-	 
-This Example model will allow you to call the function fromColumn($dbData) with your query data. Then it will convert your column name into a capitalized form and see if there is a setter function for this variable. If there is it will automagicly call this function and set the data it contains as a value.
 
 CONTROLLER
 ===========
