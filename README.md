@@ -1,6 +1,6 @@
 INTRO
 =====
-###Version 1.2
+###Version 1.3
 
 **Welcome to the Pix-art Silex Skeleton guide.**
 
