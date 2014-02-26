@@ -7,6 +7,7 @@ require_once __DIR__.'/bootstrap/database.php';
 
 use Symfony\Component\HttpFoundation\Request;
 
+//Before function to add global variables and much more to your request
 $app->before(function (Request $request) use ($app) {
     //Flashbag
 
