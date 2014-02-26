@@ -1,9 +1,9 @@
 <?php
 
 $loader = require __DIR__.'/vendor/autoload.php';
-require_once __DIR__.'/build/config.php';
-require_once __DIR__.'/build/general.php';
-require_once __DIR__.'/build/database.php';
+require_once __DIR__.'/bootstrap/config.php';
+require_once __DIR__.'/bootstrap/general.php';
+require_once __DIR__.'/bootstrap/database.php';
 
 use Symfony\Component\HttpFoundation\Request;
 
