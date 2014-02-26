@@ -30,6 +30,7 @@ class ApplicationController
         if ($form->isValid()) {
 
             $example = $form->getData();
+            //TODO Validate unique;
 
             $app['orm.em']->persist($example);
             $app['orm.em']->flush();

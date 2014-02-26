@@ -51,7 +51,6 @@ class Example implements BaseEntityInterface
     /**
      * Set all your constraints
      */
-
     public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
         $metadata->addPropertyConstraint('name', new Assert\NotBlank(array('message' => 'fill_in_field')));
@@ -148,7 +147,7 @@ class Example implements BaseEntityInterface
     /**
      * Set last_updated
      *
-     * @param \DateTime $lastUpdated
+     * @param  \DateTime $lastUpdated
      * @return Example
      */
     public function setLastUpdated($lastUpdated)
@@ -161,7 +160,7 @@ class Example implements BaseEntityInterface
     /**
      * Get last_updated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getLastUpdated()
     {

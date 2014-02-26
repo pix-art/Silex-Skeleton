@@ -40,5 +40,3 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new FormServiceProvider());
-
-$app->register(new Silex\Provider\ValidatorServiceProvider());
