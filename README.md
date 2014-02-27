@@ -1,7 +1,7 @@
 INTRO
 =====
 ###Version 1.4
-[![Build Status](https://travis-ci.org/pix-art/Silex-Skeleton.png?branch=feature/phpunit)](https://travis-ci.org/pix-art/Silex-Skeleton)
+
 **Welcome to the Pix-art Silex Skeleton guide.**
 
 In this guide i'll be explaining the basic on how to use the Skeleton and show you some neat tricks that have been implemented to make your all-day cases easier.
