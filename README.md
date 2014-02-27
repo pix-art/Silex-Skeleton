@@ -1,6 +1,6 @@
 INTRO
 =====
-###Version 1.3
+###Version 1.4
 
 **Welcome to the Pix-art Silex Skeleton guide.**
 
@@ -12,14 +12,17 @@ Silex is an MVC framework. The folder structure i use is optimized for a simple 
 
 ###Structure
 
-	├── composer.json
-	├── composer.lock
-	├── index.php
+	├── .travis.yml
 	├── .htaccess
+	├── composer.json
+	├── phpunit.xml.dist
+	├── cli-config.php
+	├── index.php
 	├── bootstrap
 	│   └── config.php
 	│   └── database.php
 	│   └── general.php
+	│   └── bootstrap.php
 	├── assets
 	│   └── ...
 	├── vendor
@@ -36,6 +39,8 @@ Silex is an MVC framework. The folder structure i use is optimized for a simple 
 	    │ 	└── view
 	    └── Service
 	    └── ServiceProvider
+	    └── Tests
+	    	└── BaseTest.php
 
 **Site:** [https://github.com/pix-art/Silex-Skeleton](https://github.com/pix-art/Silex-Skeleton)
 
@@ -110,7 +115,7 @@ Your service will contain all of your logic. 1 basic service has been provided: 
 
 **FormService** will be used to build your forms and comes with injection of the FormFactory and UrlGenerator.
 
-I use dependency injection in it's most basic form which means you'll have to inject all your services in other services via de constructor after you declared them. 
+I use dependency injection in it's most basic form which means you'll have to inject all your services in other services via de constructor after you declared them. This can be done in bootstrap.php.
 
 Example FormService injection:
 
@@ -269,3 +274,14 @@ You can print your locale at any time by fetching "locale" from the App.
 This example translates hello and will replace the variable %name% with Anonymous.
 
 	{{ 'hello'|trans|replace({'%name%' : 'Anonymous'}) }}
+
+TESTING
+============
+
+	└── src
+    	└── Tests
+
+Testing should always be done by extending BaseTest. By doing so you get access to $this->app which is the bootstrap of our Silex Application exacly as you would use it in the normal run(). This also uses the MockArraySessionStorage provided by Symfony.
+
+**Example:**
+See FormServiceTest.php
