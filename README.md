@@ -1,6 +1,6 @@
 INTRO
 =====
-###Version 1.4
+###Version 1.4 [![Build Status](https://travis-ci.org/pix-art/Silex-Skeleton.png?branch=master)](https://travis-ci.org/pix-art/Silex-Skeleton)
 
 **Welcome to the Pix-art Silex Skeleton guide.**
 
