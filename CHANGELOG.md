@@ -31,3 +31,9 @@ CHANGELOG
 * Autogenerating database structure
 * Refactored framework structure
 
+1.4.0 (2014-02-27)
+------------------
+
+* Introduced PHPUnit
+* BaseTest created and test folder
+* Refactored framework structure
