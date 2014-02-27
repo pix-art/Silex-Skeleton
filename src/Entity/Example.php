@@ -64,7 +64,8 @@ class Example implements BaseEntityInterface
             'choices' => array('male', 'female'),
             'message' => 'choose_gender',
         )));
-        $metadata->addPropertyConstraint('email', new Unique(array('field' => 'email', 'entity' => $metadata->getReflectionClass()->getName())));
+        //This can be used to compare a values uniqueness to the database via orm
+        //$metadata->addPropertyConstraint('email', new Unique(array('field' => 'email', 'entity' => $metadata->getReflectionClass()->getName())));
     }
 
     /**
