@@ -6,6 +6,7 @@ use Symfony\Component\Translation\Loader\YamlFileLoader;
 use Silex\Provider\FormServiceProvider;
 use Silex\ConstraintValidatorFactory;
 use ServiceProvider\UniqueValidatorServiceProvider;
+use Symfony\Component\HttpFoundation\Request;
 
 //TWIG
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -50,3 +51,26 @@ $app->register(new Silex\Provider\ValidatorServiceProvider(), array(
         'validator.unique' => 'validator.unique'
     ))
 ));
+
+//Before function to add global variables and much more to your request
+$app->before(function (Request $request) use ($app) {
+    //Flashbag
+
+    /**
+     * Add this in your controller
+     * $app[ 'session' ]->set( 'flash', array(
+     *               'type'    =>'error',
+     *               'short'   =>'invalid_gift',
+     *               'ext'     =>'The gift you selected is invalid',
+     *           ));
+     **/
+
+    $flash = $app[ 'session' ]->get( 'flash' );
+    $app[ 'session' ]->set( 'flash', null );
+
+    if ( !empty( $flash ) ) {
+        $app[ 'twig' ]->addGlobal( 'flash', $flash );
+    }
+
+    $app['twig']->addGlobal('current_route', str_replace('_', ' ', $request->get('_route')));
+});

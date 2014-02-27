@@ -21,7 +21,6 @@ class FormService
     {
         $form = $this->formFactory->createBuilder('form', $example)
                     //Set Form info
-                    ->setAction($this->urlGenerator->generate('step1'))
                     ->setMethod('POST')
                     //Set fields
                     ->add('name', 'text')
