@@ -16,6 +16,6 @@ facebook_id: xxxxx
 database:
     driver: pdo_mysql
     host: localhost
-    dbname: test
+    dbname: skeleton_test
     user: user
     password: password

@@ -16,6 +16,10 @@
         "tobiassjosten/facebook-service-provider": "dev-master",
         "dflydev/doctrine-orm-service-provider": "1.0.*@dev"
     }, 
+    "require-dev": {
+        "phpunit/phpunit": "~3.7",
+        "nelmio/alice": "1.6.*@dev"
+    },
     "autoload": {
         "psr-0": {
         	"": "src"

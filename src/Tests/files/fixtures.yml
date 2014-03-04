@@ -1,0 +1,5 @@
+Entity\Example:
+    example{1..10}:
+        name: <firstName()>
+        gender: male
+        email: <email()>
