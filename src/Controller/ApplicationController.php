@@ -24,6 +24,8 @@ class ApplicationController
         if ($form->isValid()) {
 
             $example = $form->getData();
+            $example->setLanguage($request->get('_locale'));
+            $example->setIp($request->getClientIp());
 
             $app['orm.em']->persist($example);
             $app['orm.em']->flush();
