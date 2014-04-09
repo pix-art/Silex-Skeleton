@@ -26,6 +26,16 @@ class Example implements BaseEntityInterface
     private $last_updated;
 
     /**
+    * @ORM\Column(type="string", length=20)
+    */
+    private $ip;
+
+    /**
+    * @ORM\Column(type="string", length=2)
+    */
+    private $language;
+
+    /**
      * @ORM\Column(type="string", length=250)
      */
     private $name;
@@ -168,5 +178,51 @@ class Example implements BaseEntityInterface
     public function getLastUpdated()
     {
         return $this->last_updated;
+    }
+
+    /**
+     * Set ip
+     *
+     * @param string $ip
+     * @return Example
+     */
+    public function setIp($ip)
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    /**
+     * Get ip
+     *
+     * @return string 
+     */
+    public function getIp()
+    {
+        return $this->ip;
+    }
+
+    /**
+     * Set language
+     *
+     * @param string $language
+     * @return Example
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return string 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }
