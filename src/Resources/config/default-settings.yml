@@ -10,12 +10,16 @@ google_analytics:
     id: XXX #Last numbers of job nr
     name: Yunomi #used in GA tracking!
 
-facebook_id: xxxxx
-
-
 database:
     driver: pdo_mysql
     host: localhost
     dbname: test
     user: user
     password: password
+
+facebook:
+	app_id: xxxxx #This is needed for share macro
+    secret: xxxxx #This is needed for an interactive app
+
+#This will enable/dissable all tab features (mobile redirect, facebook auto size, ...)
+facebook_activate_tab: true
