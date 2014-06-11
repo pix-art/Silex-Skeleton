@@ -17,7 +17,7 @@ class ApplicationController
     {
         $example = new Example();
 
-        $form = $app['FormService']->buildStep1($example);
+        $form = $app['form_service']->buildStep1($example);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

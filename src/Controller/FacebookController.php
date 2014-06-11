@@ -17,19 +17,19 @@ class FacebookController
         //     die('<script type="text/javascript">window.top.location = "' . $app['url_generator']->generate('facebook_redirect', array(), true) . '"</script>');
         // }
 
-        if ($app['FacebookService']->isLiked()) {
+        if ($app['facebook_service']->isLiked()) {
             
-            $locale = $app['FacebookService']->getCurrentLanguage($locale);
+            $locale = $app['facebook_service']->getCurrentLanguage($locale);
 
             return $app->redirect($app['url_generator']->generate($app['config']['facebook']['start_route'], array('_locale' => $locale)));
         }    
 
-        return $app['twig']->render('nofan.html.twig', array('locale' => $locale));
+        return $app['twig']->render('facebook/nofan.html.twig', array('locale' => $locale));
     }
 
     public function redirectAction(Request $request, Application $app)
     {   
-        if($app['GeneralService']->isMobile()) {
+        if($app['general_service']->isMobile()) {
             $locale = $app['config']['default_language'];
             $url = $app['url_generator']->generate($app['config']['facebook']['start_route'], array('_locale' => $locale));
             return $app->redirect($url);
