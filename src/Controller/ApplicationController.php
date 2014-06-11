@@ -15,7 +15,6 @@ class ApplicationController
 
     public function step1Action(Request $request, Application $app)
     {
-
         $example = new Example();
 
         $form = $app['FormService']->buildStep1($example);
