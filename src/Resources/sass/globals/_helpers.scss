@@ -1,0 +1,58 @@
+//  -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+//  Reusable helper classes
+//  -----------------------------------------------------------------------------------------------------------------------------------------------------------------
+    // overwrites/resets
+    .no-padding                         { padding: 0 !important; }
+    .no-margin                          { margin: 0 !important; }
+    .no-float                           { float: none !important; } 
+    .no-border                          { border: 0 !important; }
+                    
+    // positioning
+    .fixed                              { position: fixed !important; }
+    .relative                           { position: relative !important; }
+    .absolute                           { position: absolute !important; }
+    .center                             { display: block !important; float: none !important; margin-left: auto !important; margin-right: auto !important; }
+    
+    // floats
+    .left                               { float: left !important; }
+    .right                              { float: right !important; }
+    .wrap                               { overflow: auto; }
+    .clearfix                           { *zoom: 1; }
+    .clearfix:before,
+    .clearfix:after                     { content: " "; display: table; }
+    .clearfix:after                     { clear: both; }
+    
+    // text
+    .text-right                         { text-align: right; }
+    .text-left                          { text-align: left; }
+    .text-justify                       { text-align: justify; }
+    .text-center                        { text-align: center; }
+    .ellipsis                           { overflow: hidden; }
+    .underline                          { border-bottom:1px solid; }
+    .strike                             { text-decoration :line-through; }
+    .hide-text                          { text-indent: 100%; white-space: nowrap; overflow: hidden; }
+    .spaced                             { letter-spacing : 1px; }
+                    
+    // displays                 
+    .block                              { display: block !important; }
+    .inline                             { display: inline-block !important; }
+    .show                               { display:block; }
+    .hide                               { display:none; }
+    .disabled                           { pointer-events: none; opacity:0.5; }
+    .invisible                          { visibility: hidden; }
+    .hidden                             { display: none !important; visibility: hidden; }
+    .visuallyhidden                     { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+    .visuallyhidden.focusable:active,
+    .visuallyhidden.focusable:focus     { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+    // tables
+    .table-wrapper                      { display: table; border-collapse: collapse; }
+    .table-row                          { display: table-row; }
+    .table-cell                         { display: table-cell; float: left; }
+    .valign-top                         { vertical-align: top; }
+    .valign-middle                      { vertical-align: middle; }
+    .valign-bottom                      { vertical-align: bottom; }
+
+    // images
+    .ir                                 { background-color: transparent; border: 0; overflow: hidden; *text-indent: -9999px; }
+    .ir:before                          { content: ""; display: block; width: 0; height: 150%; }
