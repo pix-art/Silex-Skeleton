@@ -1,6 +1,6 @@
 {% macro facebookUrl(social_title, social_text) %}
     https://www.facebook.com/dialog/feed?
-	app_id={{ app.config.facebook_id }}&
+	app_id={{ app.config.facebook.app_id }}&
 	link={{ app.config.base_url }}&
 	picture={{ app.config.base_url }}assets/img/share.jpg&
 	name={{ social_title|url_encode(true) }}&

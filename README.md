@@ -119,7 +119,7 @@ I use dependency injection in it's most basic form which means you'll have to in
 
 Example FormService injection:
 
-	$app['FormService'] = function ($app) {
+	$app['form_service'] = function ($app) {
     	return new Service\FormService($app['form.factory'], $app['url_generator']);
 	};
 
