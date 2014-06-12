@@ -36,25 +36,31 @@ gulp.task('clean', function(cb) {
 gulp.task('lint', function() {
    var path = config.scripts();
 
-   return gulp.src(path)
+   return gulp.src(path + '/*.js')
        .pipe(plumber())
        .pipe(jshint())
        .pipe(jshint.reporter('default'))
+       .pipe(gulp.dest(config.dist + '/js'));
 });
 
-gulp.task('uglify', function () {
-   var dir = config.styles();
+gulp.task('js-vendors', function(){
+   gulp.src(config.app + '/js/vendor/**/*')
+   .pipe(gulp.dest(config.dist + '/js/vendor/'));
+});
 
-   return gulp.src(config.app + '/js')
+
+gulp.task('uglify', function () {
+   var path = config.scripts();
+
+   return gulp.src(path + '/**/*')
        .pipe(plumber())
        .pipe(uglify())
        .pipe(gulp.dest(config.dist + '/js'));
 });
 
 gulp.task('compass', function() {
-    var dir = config.styles();
-
-    return gulp.src(dir + '/**/*.scss')
+    var path = config.styles();
+    return gulp.src(path + '/**/*.scss')
         .pipe(plumber())
         .pipe(compass({
             config_file: './config.rb',
@@ -65,8 +71,6 @@ gulp.task('compass', function() {
 });
 
 gulp.task('minify-css', function () {
-   var dir = config.styles();
-
    return gulp.src(config.app + '/css')
        .pipe(plumber())
        .pipe(minifycss())
@@ -74,17 +78,18 @@ gulp.task('minify-css', function () {
 });
 
 gulp.task('images', function(){
-   return gulp.src(config.app + '/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}')
+   var path = config.images();
+   return gulp.src(path + '/**/*')
        .pipe(cache(imagemin({
            optimizationLevel: 5,
            progressive: true,
            interlaced: true
        })))
-       .pipe(gulp.dest(config.app + '/img'));
+       .pipe(gulp.dest(path));
 });
 
 gulp.task('images-copy', function(){
-   gulp.src(config.app + '/img/{,*/}*.{png,jpg,jpeg,gif,webp,svg}')
+   gulp.src(config.images() + '/**/*')
    .pipe(gulp.dest(config.dist + '/img'));
 });
 
@@ -94,13 +99,16 @@ gulp.task('minify-end', function(){
         .pipe(notify({ message: 'Build task complete' }));
 })
 
-gulp.task('watch', function() {
+gulp.task('watch', ['js-vendors'], function() {
 
    // Watch .scss files
    gulp.watch(config.styles() + '/**/*.scss', ['compass']);
 
    // Watch .js files
-   gulp.watch(config.scripts() + '/**/*.js', ['lint']);
+   gulp.watch(config.scripts() + '/*.js', ['lint']);
+
+   // Watch vendors and move them
+   gulp.watch(config.scripts() + '/vendor/**/*', ['js-vendors']);
 
    // Watch image files
    gulp.watch(config.images() + '/**/*', ['images', 'images-copy']);

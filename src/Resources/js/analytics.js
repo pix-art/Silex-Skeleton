@@ -20,19 +20,18 @@
         	}, options);
 
     	$('*[' + settings.value + '][' + settings.action + ']').bind('click', function(){
-            var go = true,
-                error = null;
+            var error = null;
 
     		settings.gaValue = $(this).attr(settings.value),
     		settings.gaAction = $(this).attr(settings.action);
 
             for (var setting in settings) {
-                if(settings[setting] == null) {
+                if(settings[setting] === null) {
                     error = 'no ' + setting + ' set';
                 }
             }
 
-            if(error == null) {
+            if(error === null) {
                 if(settings.debug && console){
                     console.log(settings);
                 }
@@ -54,11 +53,9 @@
     };
 }(jQuery));
 
-$(function(){
-    $('body').track({
-        debug : _ga_debug,
-        id : _ga_project_id,
-        name : _ga_project_name,
-        language : _ga_language
-    });
+$('body').track({
+  debug : _ga_debug,
+  id : _ga_project_id,
+  name : _ga_project_name,
+  language : _ga_language
 });
