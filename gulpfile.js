@@ -11,7 +11,7 @@ var gulp = require('gulp'),
    notify = require('gulp-notify'),
 
    config = {
-       app: './src/Resources',
+       app: 'src/Resources',
        dist: 'assets',
        port: 9000,
        scripts: function () {
@@ -67,14 +67,14 @@ gulp.task('compass', function() {
             css: config.dist + '/css',
             sass: config.app + '/sass'
         }))
-        .pipe(gulp.dest(config.dist + '/css'));
 });
 
+//TODO: Fix this so it actually minifies
 gulp.task('minify-css', function () {
-   return gulp.src(config.app + '/css')
+   var path = config.dist + '/css';
+   return gulp.src(path)
        .pipe(plumber())
-       .pipe(minifycss())
-       .pipe(gulp.dest(config.dist + '/css'));
+       .pipe(minifycss());
 });
 
 gulp.task('images', function(){
@@ -120,6 +120,6 @@ gulp.task('default', function() {
    gulp.start('watch');
 });
 
-gulp.task('build', ['clean'], function(){
-   gulp.start('images-copy', 'minify-css', 'uglify', 'minify-end');
+gulp.task('build', ['clean', 'compass'], function(){
+   gulp.start('images-copy','uglify', 'minify-css','minify-end');
 });

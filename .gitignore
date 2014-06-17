@@ -4,6 +4,6 @@ composer.lock
 composer.phar
 compify.phar
 /src/Resources/config/settings.yml
-assets
+/assets
 .sass-cache/
 node_modules/
