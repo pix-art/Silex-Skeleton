@@ -1,6 +1,6 @@
 debug: true
 
-base_url: http://www.local.dev/Silex-Skeleton/
+base_url: http://www.local.dev/
 
 default_language: nl
 languages: [nl, fr, en]
@@ -19,7 +19,7 @@ database:
 
 #Basic information needed for facebook
 facebook:
-    app_id: 784634591576735
-    secret: ba560a668f4634038119962fbf12bddb
-    tab: https://www.facebook.com/headoffice.envee/app_784634591576735 #tab url if you want redirect action to work
+    app_id: xxx
+    secret: xxx
+    tab: https://www.facebook.com/xxxxxx/app_xxxxx #tab url if you want redirect action to work
     start_route: index #The route you will be redirected to if mobile or if liked
