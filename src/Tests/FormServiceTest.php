@@ -9,7 +9,7 @@ class FormServiceTest extends BaseTest
 
     protected function createFormService()
     {
-        return $this->app['FormService'];
+        return $this->app['form_service'];
     }
 
     public function testBuildStep1()

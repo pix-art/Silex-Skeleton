@@ -1,0 +1,75 @@
+/*
+==========================================================================
+Grid CSS
+- 12 column Grid system [target / context = result]
+==========================================================================
+*/
+
+@function calc-percent($target) {
+    @return ($target / $max-width) * 100%;
+}
+
+@function cp($target) {
+    @return calc-percent($target);
+}
+
+.grid-container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: $max-width;
+    width: 100%;
+}
+
+@for $i from 1 through $columns {
+    .grid-container .grid-#{$i} {
+        display: inline;
+        float: left;
+        width: cp((($max-width/$columns) * $i) - $gutter);
+        padding: $padding;
+        @include border-box();
+    }
+}
+
+@for $i from 1 through $columns {
+    .grid-container .push-#{$i} {
+        margin-left: cp((($max-width/$columns) * $i) + ($gutter/2));
+        position: relative;
+    }
+}
+
+.alpha {
+    margin-left: 0;
+}
+
+.omega {
+    margin-right: 0;
+}
+
+.clear {
+  clear: both;
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
+
+.grid-container:before,
+.grid-container:after {
+  content: ' ';
+  display: block;
+  overflow: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  height: 0;
+}
+
+.grid-container:after {
+  clear: both;
+}
+
+.grid-container {
+  zoom: 1;
+}
