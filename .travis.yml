@@ -7,6 +7,7 @@ php:
 before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
+  - cp src/Resources/config/default-settings.yml src/Resources/config/settings.yml
 
 
 script: phpunit
