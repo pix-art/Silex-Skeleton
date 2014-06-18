@@ -23,7 +23,8 @@ $app['translator'] = $app->share($app->extend('translator', function ($translato
     $translator->addLoader('yaml', new YamlFileLoader());
 
     foreach ($app['config']['languages'] as $language) {
-        $translator->addResource('yaml', __DIR__.'/../src/Resources/translations/'.$language.'.yml', $language);
+        $translator->addResource('yaml', __DIR__.'/../src/Resources/translations/'.$language.'.yml', $language, 'messages');
+        $translator->addResource('yaml', __DIR__.'/../src/Resources/translations/validator_'.$language.'.yml', $language, 'validators');
     }
 
     return $translator;
