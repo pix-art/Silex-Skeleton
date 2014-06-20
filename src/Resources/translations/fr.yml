@@ -1,2 +1,14 @@
+############
+# Page SEO #
+############
+default_page_title: Untitled
+default_seo_description: la description de votre site
+default_seo_keywords: site web, cas de test, des mots-clés
+default_seo_author: utilisateur
+
+###########
+# Content #
+###########
+
 hello: Bonjour %name%
 name: Nom

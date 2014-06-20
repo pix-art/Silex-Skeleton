@@ -2,7 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Untitled{% endblock %}</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        
+        <!-- SEO -->
+        <title>{% block title %}{{ 'default_page_title'|trans }}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{{ 'default_seo_description'|trans }}{% endblock %}">
+        <meta name="keywords" content="{% block keywords %}{{ 'default_seo_keywords'|trans }}{% endblock %}">
+        <meta name="author" content="{% block author %}{{ 'default_seo_author'|trans }}{% endblock %}">
+        <meta name="robots" content="index, follow">
+        <!-- /SEO-->
+
         <base href="{{ app.config.base_url }}">
         <!-- Styles -->
         <link rel="stylesheet" href="assets/css/normalize.min.css">
