@@ -1,6 +1,6 @@
 INTRO
 =====
-###Version 1.5 [![Build Status](https://travis-ci.org/pix-art/Silex-Skeleton.png?branch=master)](https://travis-ci.org/pix-art/Silex-Skeleton)
+###Version 1.5.3 [![Build Status](https://travis-ci.org/pix-art/Silex-Skeleton.png?branch=master)](https://travis-ci.org/pix-art/Silex-Skeleton)
 
 **Welcome to the Pix-art Silex Skeleton guide.**
 
@@ -88,10 +88,6 @@ CONFIGURATION
 Debug mode on/off
 
 	debug: true
-
-Base url is used for absolute pathing
-
-	base_url: http://www.example.com
 
 Languages
 	
