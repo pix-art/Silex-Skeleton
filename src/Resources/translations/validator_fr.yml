@@ -1,0 +1,10 @@
+###############
+# Errors list #
+###############
+invalid_number: Veuillez compléter avec des chiffres
+fill_in_field: Champ obligatoire
+incorrect_email: Adresse e-mail non valable
+input_to_short_2: Minimum 2 caractères
+input_to_short_9: Minimum 9 caractères
+rules_invalid: Lire et approuver les conditions générales de participation
+select_atleast_one_session: Cliquez sur le lieu pour lequel vous souhaitez vous inscrire

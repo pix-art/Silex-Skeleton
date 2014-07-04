@@ -2,13 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Untitled{% endblock %}</title>
-        <base href="{{ app.config.base_url }}">
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+        
+        <!-- SEO -->
+        <title>{% block title %}{{ 'default_page_title'|trans }}{% endblock %}</title>
+        <meta name="description" content="{% block description %}{{ 'default_seo_description'|trans }}{% endblock %}">
+        <meta name="keywords" content="{% block keywords %}{{ 'default_seo_keywords'|trans }}{% endblock %}">
+        <meta name="author" content="{% block author %}{{ 'default_seo_author'|trans }}{% endblock %}">
+        <meta name="robots" content="index, follow">
+        <!-- /SEO-->
+
         <!-- Styles -->
-        <link rel="stylesheet" href="assets/css/normalize.min.css">
-        <script src="assets/js/vendor/modernizr-2.8.2.min.js"></script>
+        <script src="{{ app.request.basepath }}/assets/js/vendor/modernizr-2.8.2.min.js"></script>
         {% block stylesheets %}
-        <link rel="stylesheet" href="assets/css/style.css" type="text/css" media="screen" />
+        <link rel="stylesheet" href="{{ app.request.basepath }}/assets/css/style.css" type="text/css" media="screen" />
         {% endblock %}
 
 
@@ -24,8 +31,8 @@
 
         {% block javascripts %}
         {% endblock %}
-        <script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
-        <script src="assets/js/main.js"></script>
+        <script src="{{ app.request.basepath }}/assets/js/vendor/jquery-1.11.1.min.js"></script>
+        <script src="{{ app.request.basepath }}/assets/js/main.js"></script>
 
         <script type="text/javascript">
           var _gaq = _gaq || [];
@@ -44,7 +51,7 @@
           })();
 
         </script>
-        <script src="assets/js/analytics.js"></script>
+        <script src="{{ app.request.basepath }}/assets/js/analytics.js"></script>
     </body>
 </html>
 

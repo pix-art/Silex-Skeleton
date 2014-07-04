@@ -1,0 +1,10 @@
+###############
+# Errors list #
+###############
+invalid_number: Gelieve nummers in te vullen
+fill_in_field: Invullen verplicht
+incorrect_email: Foutief e-mailadres
+input_to_short_2: Minimum 2 karakters
+input_to_short_9: Minimum 9 karakters
+rules_invalid: Wedstrijdvoorwaarden lezen en goedkeuren
+select_atleast_one_session: Klik de locatie aan waar je je wil inschrijven

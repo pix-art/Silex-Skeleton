@@ -1,2 +1,14 @@
+############
+# Page SEO #
+############
+default_page_title: Ongetitelt
+default_seo_description: Jou website omschrijving
+default_seo_keywords: website, test case, keywords
+default_seo_author: user
+
+###########
+# Content #
+###########
+
 hello: Hallo %name%
 name: Naam
