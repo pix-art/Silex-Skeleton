@@ -1,7 +1,5 @@
 debug: true
 
-base_url: http://www.local.dev/Silex-Skeleton/
-
 default_language: nl
 languages: [nl, fr, en]
 
@@ -10,12 +8,16 @@ google_analytics:
     id: XXX #Last numbers of job nr
     name: Yunomi #used in GA tracking!
 
-facebook_id: xxxxx
-
-
 database:
     driver: pdo_mysql
-    host: localhost
-    dbname: skeleton_test
-    user: user
-    password: password
+    host: mysql006.hosting.combell.com
+    dbname: ID110628_yuni
+    user: ID110628_yuni
+    password: Password1
+
+#Basic information needed for facebook
+facebook:
+    app_id: xxx
+    secret: xxx
+    tab: https://www.facebook.com/xxxxxx/app_xxxxx #tab url if you want redirect action to work
+    start_route: index #The route you will be redirected to if mobile or if liked

@@ -2,29 +2,36 @@
 
 namespace Tests;
 
-use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
-
 abstract class BaseTest extends \PHPUnit_Framework_TestCase
 {
     protected $app;
+    protected $connection;
 
     protected function setUp()
     {
         $this->app = $this->createApplication();
-        $this->app['db']->beginTransaction();
-        $this->app['session.storage'] = new MockArraySessionStorage();
+        $this->setConnection();
         $this->loadFixtures();
+    }
+
+    protected function setConnection()
+    {
+        $this->connection = $this->app['orm.em']->getConnection();
+        $this->connection->connect();
+        $this->connection->beginTransaction();
     }
 
     protected function tearDown()
     {
-        $this->app['db']->rollback();
+        $this->connection->rollback();
+        $this->connection->close();
     }
 
     protected function createApplication()
     {
         $app = require __DIR__.'/../../bootstrap/bootstrap.php';
         $app['debug'] = true;
+        $app['session.test'] = true;
         $app['exception_handler']->disable();
 
         return $app;

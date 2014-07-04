@@ -3,3 +3,5 @@ Entity\Example:
         name: <firstName()>
         gender: male
         email: <email()>
+        language: nl
+        ip: 127.0.0.1

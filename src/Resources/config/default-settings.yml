@@ -1,7 +1,5 @@
 debug: true
 
-base_url: http://www.local.dev/
-
 default_language: nl
 languages: [nl, fr, en]
 
