@@ -1,0 +1,29 @@
+/*
+==========================================================================
+Mixins
+==========================================================================
+*/
+
+@mixin transition($arg) {
+    -webkit-transition: $arg;
+       -moz-transition: $arg;
+        -ms-transition: $arg;
+         -o-transition: $arg;
+            transition: $arg;
+}
+
+@mixin border-radius($arg){
+    -webkit-border-radius: $arg;
+            border-radius: $arg;
+}
+
+@mixin box-shadow($arg) {
+    -webkit-box-shadow: $arg;
+            box-shadow: $arg;
+}
+
+@mixin border-box() {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}

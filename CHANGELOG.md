@@ -37,3 +37,9 @@ CHANGELOG
 * Introduced PHPUnit
 * BaseTest created and test folder
 * Refactored framework structure
+
+1.5.0 (2014-06-17)
+------------------
+
+* Introduced Gulp 
+* Facebook tab/mobile stuff implemented

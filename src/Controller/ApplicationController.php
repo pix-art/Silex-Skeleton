@@ -15,15 +15,16 @@ class ApplicationController
 
     public function step1Action(Request $request, Application $app)
     {
-
         $example = new Example();
 
-        $form = $app['FormService']->buildStep1($example);
+        $form = $app['form_service']->buildStep1($example);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
 
             $example = $form->getData();
+            $example->setLanguage($request->get('_locale'));
+            $example->setIp($request->getClientIp());
 
             $app['orm.em']->persist($example);
             $app['orm.em']->flush();

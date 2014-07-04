@@ -1,0 +1,25 @@
+debug: true
+
+base_url: http://www.local.dev/
+
+default_language: nl
+languages: [nl, fr, en]
+
+google_analytics:
+    code: UA-XXXXXXX-1
+    id: XXX #Last numbers of job nr
+    name: Yunomi #used in GA tracking!
+
+database:
+    driver: pdo_mysql
+    host: localhost
+    dbname: test
+    user: user
+    password: password
+
+#Basic information needed for facebook
+facebook:
+    app_id: xxx
+    secret: xxx
+    tab: https://www.facebook.com/xxxxxx/app_xxxxx #tab url if you want redirect action to work
+    start_route: index #The route you will be redirected to if mobile or if liked

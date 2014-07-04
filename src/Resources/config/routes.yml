@@ -14,3 +14,13 @@ index:
 step1:
   path: /{_locale}/step1
   defaults: { _controller: 'Controller\ApplicationController::step1Action' }
+
+
+#Facebook Routing
+facebook_fangate:
+  path: /fangate
+  defaults: { _controller: 'Controller\FacebookController::fangateAction' }
+
+facebook_redirect:
+  path: /fbredirect
+  defaults: { _controller: 'Controller\FacebookController::redirectAction' }

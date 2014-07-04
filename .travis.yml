@@ -1,16 +1,14 @@
 language: php
 php:
-  - 5.3
   - 5.4
   - 5.5
 
 before_script:
-  - wget http://getcomposer.org/composer.phar
-  - php composer.phar install
   - mysql -e 'create database skeleton_test;'
   - mysql -e "CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';"
   - mysql -e "GRANT ALL PRIVILEGES ON * . * TO 'user'@'localhost';"
   - php vendor/bin/doctrine orm:generate-entities src/
   - php vendor/bin/doctrine orm:schema-tool:create
+  - cp src/Resources/config/default-settings.yml src/Resources/config/settings.yml
 
 script: phpunit
