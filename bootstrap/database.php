@@ -25,3 +25,8 @@ $app->register(new DoctrineOrmServiceProvider, array(
         ),
     ),
 ));
+
+//Force UTF-8
+$app['orm.em']->getEventManager()->addEventSubscriber(
+    new \Doctrine\DBAL\Event\Listeners\MysqlSessionInit('utf8', 'utf8_unicode_ci')
+);
