@@ -8,8 +8,8 @@
         "symfony/config": "~2.1",
         "symfony/yaml": "~2.1",
         "symfony/security": "~2.3",
-        "symfony/form": "~2.3",
-        "symfony/validator": "~2.3",
+        "symfony/form": "2.5.0",
+        "symfony/validator": "2.5.0",
         "deralex/yaml-config-service-provider": "1.0.x-dev",
         "dflydev/doctrine-orm-service-provider": "1.0.*@dev",
         "facebook/php-sdk-v4": "4.0.*"
