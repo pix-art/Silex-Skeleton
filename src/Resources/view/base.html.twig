@@ -29,8 +29,6 @@
             
         {% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
         <script src="{{ app.request.basepath }}/assets/js/vendor/jquery-1.11.1.min.js"></script>
         <script src="{{ app.request.basepath }}/assets/js/main.js"></script>
 
@@ -52,6 +50,9 @@
 
         </script>
         <script src="{{ app.request.basepath }}/assets/js/analytics.js"></script>
+        
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>
 
